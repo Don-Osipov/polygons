@@ -91,7 +91,6 @@ def parse_file(fname, edges, polygons, transform, screen, color):
 
         elif line == "line":
             # print 'LINE\t' + str(args)
-
             add_edge(edges, *args)
 
         elif line == "scale":
@@ -120,16 +119,13 @@ def parse_file(fname, edges, polygons, transform, screen, color):
             ident(transform)
 
         elif line == "apply":
-            matrix_mult(transform, edges)
             matrix_mult(transform, polygons)
 
         elif line == "clear":
-            edges = []
             polygons = []
 
         elif line == "display" or line == "save":
             clear_screen(screen)
-            draw_lines(edges, screen, color)
             draw_polygons(polygons, screen, color)
 
             if line == "display":
@@ -137,3 +133,4 @@ def parse_file(fname, edges, polygons, transform, screen, color):
             else:
                 save_extension(screen, args[0])
         c += 1
+
